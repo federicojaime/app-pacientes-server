@@ -45,9 +45,13 @@ app.use(async (req, res, next) => {
     }
 });
 
-// Ruta de prueba
+// Estado del servidor
 app.get('/', (req, res) => {
-    res.json({ message: 'API del servidor de Pacientes funcionando correctamente' });
+    res.json({ 
+        message: 'API del servidor de Pacientes funcionando correctamente',
+        environment: process.env.NODE_ENV || 'development',
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Verificar paciente por DNI
@@ -252,6 +256,14 @@ app.get('/api/patients/:id/medical-tests', async (req, res) => {
     });
 });
 
+// Manejo de rutas no encontradas
+app.use((req, res) => {
+    res.status(404).json({
+        error: 'Ruta no encontrada',
+        path: req.path
+    });
+});
+
 // Middleware para manejo de errores
 app.use((err, req, res, next) => {
     console.error('Error no manejado:', err);
@@ -263,5 +275,6 @@ app.use((err, req, res, next) => {
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+    console.log(`Servidor ejecutándose en el puerto ${PORT}`);
+    console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
 });
