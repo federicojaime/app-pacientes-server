@@ -1,0 +1,11 @@
+# .env.test
+
+# Configuración del servidor
+PORT=8000
+NODE_ENV=production
+
+# Configuración de la base de datos MySQL
+DB_HOST=srv1597.hstgr.io
+DB_USER=u565673608_AltaLuna
+DB_PASSWORD=!w6CLEt7:
+DB_NAME=u565673608_AltaLuna
